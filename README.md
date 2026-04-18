@@ -1,8 +1,5 @@
 # 何彬 (HeBin)
 ![](https://img.shields.io/badge/高级产品经理%20|%20资深视觉专家-0366d6?style=for-the-badge)
-&nbsp;
-[![WeChat](https://img.shields.io/badge/WeChat-07C160?style=for-the-badge&logo=wechat&logoColor=white)](https://picabstract-preview-ftn.weiyun.com/ftn_pic_abs_v3/bf8bdee0604fccd9a4d7a02eac904b0422dcf1438ac3ffd43ec0e88af6913db7cf51f9ff9db86d00c8adfe599241d130?pictype=scale&from=30113&version=3.3.3.3&fname=wx.png&size=750)
-
 ### 个人概览
 
 | 维度 | 信息 |
