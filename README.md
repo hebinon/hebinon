@@ -2,6 +2,8 @@
 ![职位](https://img.shields.io/badge/高级产品经理%20|%20资深视觉专家-0366d6?style=for-the-badge)
 &nbsp;
 ![抖音](https://img.shields.io/badge/Douyin-000000?style=for-the-badge&logo=tiktok&logoColor=white)
+&nbsp;
+[![WeChat](https://img.shields.io/badge/WeChat-07C160?style=for-the-badge&logo=wechat&logoColor=white)](你的二维码链接或微信号)
 
 ### 个人概览
 
@@ -10,7 +12,7 @@
 | **职能定位** | 产品战略规划、工业级 UI/UX 设计、物联网（IoT）解决方案 |
 | **行业背景** | 21年从业经验，横跨智慧工业、智慧城市、农业信息化及数字艺术领域 |
 | **核心优势** | 具备从底层视觉设计到高层产品架构的复合背景，精通BIM、SaaS及数字孪生产品全生命周期管理 |
-| **联系电话** | 152-4465-1055 |
+| **联系电话** | 152-4465-1055【微信同号】|
 
 ---
 
