@@ -1,5 +1,11 @@
 # 何彬 (HeBin)
-**高级产品经理 | 资深视觉专家**
+![职位](https://img.shields.io/badge/高级产品经理%20|%20资深视觉专家-0366d6?style=for-the-badge)
+
+[![抖音](https://img.shields.io/badge/Douyin-000000?style=for-the-badge&logo=douyin&logoColor=white)](你的链接)
+&nbsp;
+[![小红书](https://img.shields.io/badge/Xiaohongshu-ff2442?style=for-the-badge&logo=xiaohongshu&logoColor=white)](你的链接)
+&nbsp;
+[![Bilibili](https://img.shields.io/badge/Bilibili-fb7299?style=for-the-badge&logo=bilibili&logoColor=white)](你的链接)
 
 ### 个人概览
 
@@ -9,8 +15,6 @@
 | **行业背景** | 21年从业经验，横跨智慧工业、智慧城市、农业信息化及数字艺术领域 |
 | **核心优势** | 具备从底层视觉设计到高层产品架构的复合背景，精通BIM、SaaS及数字孪生产品全生命周期管理 |
 | **联系电话** | 152-4465-1055 |
-| **期望城市** | 哈尔滨 |
-| **薪资预期** | 8-12K |
 
 ---
 
