@@ -1,9 +1,7 @@
 # 何彬 (HeBin)
 ![职位](https://img.shields.io/badge/高级产品经理%20|%20资深视觉专家-0366d6?style=for-the-badge)
 &nbsp;
-[![抖音](https://img.shields.io/badge/Douyin-000000?style=for-the-badge&logo=douyin&logoColor=white)](你的链接)
-&nbsp;
-[![小红书](https://img.shields.io/badge/Xiaohongshu-ff2442?style=for-the-badge&logo=xiaohongshu&logoColor=white)](你的链接)
+![抖音](https://img.shields.io/badge/Douyin-000000?style=for-the-badge&logo=tiktok&logoColor=white)
 
 ### 个人概览
 
