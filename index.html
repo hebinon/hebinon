@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEBINON | 写实素描作品集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 暗色主题变量 */
+        :root {
+            --bg-primary: #0c0c0c;
+            --bg-surface: #141414;
+            --bg-elevated: #1a1a1a;
+            --text-primary: #fafafa;
+            --text-secondary: #888888;
+            --text-muted: #4a4a4a;
+            --accent: #c4a77d;
+            --accent-dim: #7a6a4d;
+            --border: #2a2a2a;
+            --font-display: 'Cormorant Garamond', 'Noto Serif SC', serif;
+            --font-body: 'Noto Serif SC', serif;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 亮色主题变量 */
+        [data-theme="light"] {
+            --bg-primary: #f8f6f2;
+            --bg-surface: #ffffff;
+            --bg-elevated: #f0ece6;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-muted: #aaaaaa;
+            --accent: #a08050;
+            --accent-dim: #c4a77d;
+            --border: #e0dcd5;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* 动态背景 */
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        [data-theme="light"] .background-layer {
+            opacity: 0.4;
+        }
+
+        [data-theme="light"] .bg-orb {
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent), transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #6a5a42, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -7s;
+        }
+
+        .bg-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #a08050, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -14s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        .flow-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .flow-line {
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            opacity: 0.25;
+            animation: flowLine 8s ease-in-out infinite;
+        }
+
+        .flow-line:nth-child(1) { left: 15%; }
+        .flow-line:nth-child(2) { left: 35%; animation-delay: -2s; }
+        .flow-line:nth-child(3) { left: 55%; animation-delay: -4s; }
+        .flow-line:nth-child(4) { left: 75%; animation-delay: -6s; }
+
+        @keyframes flowLine {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(100%); opacity: 0; }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 15s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 40%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 55%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 70%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 85%; animation-delay: 5s; }
+
+        @keyframes particleFloat {
+            0% { opacity: 0; transform: translateY(0); }
+            10% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(-100vh); }
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 200;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text-primary);
+        }
+
+        .theme-toggle .sun-icon { display: block; }
+        .theme-toggle .moon-icon { display: none; }
+
+        [data-theme=""] .theme-toggle .sun-icon { display: none; }
+        [data-theme=""] .theme-toggle .moon-icon { display: block; }
+
+        /* 导航 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.4s var(--ease-out-expo), padding 0.4s var(--ease-out-expo);
+        }
+
+        [data-theme="light"] nav {
+            background: linear-gradient(to bottom, var(--bg-primary), transparent);
+        }
+
+        nav.scrolled {
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1.2rem 4rem;
+        }
+
+        :root {
+            --bg-rgb: 12, 12, 12;
+            --nav-bg: rgba(12, 12, 12, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-rgb: 248, 246, 242;
+            --nav-bg: rgba(248, 246, 242, 0.5);
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.35s var(--ease-out-expo);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 首页 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(196, 167, 125, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.45em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            animation: fadeUp 1.1s var(--ease-out-expo) forwards;
+            animation-delay: 0.4s;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            line-height: 1.15;
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-title span {
+            display: block;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) forwards;
+        }
+
+        .hero-title span:nth-child(1) { animation-delay: 0.6s; }
+        .hero-title span:nth-child(2) { animation-delay: 0.75s; }
+
+        .hero-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            max-width: 440px;
+            margin: 0 auto 2.8rem;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) forwards;
+            animation-delay: 0.9s;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.22em;
+            color: var(--text-primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 1rem 2.8rem;
+            border: 1px solid var(--border);
+            transition: all 0.4s var(--ease-out-expo);
+            opacity: 0;
+            animation: fadeUp 1s var(--ease-out-expo) forwards;
+            animation-delay: 1.05s;
+        }
+
+        .hero-cta:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+            animation-delay: 1.4s;
+        }
+
+        .scroll-hint span {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 36px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2.2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.25; height: 36px; }
+            50% { opacity: 0.8; height: 52px; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 作品集 */
+        .gallery {
+            padding: 10rem 4rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+        }
+
+        .gallery-slider {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+
+        .gallery-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gallery-item-inner {
+            position: relative;
+            max-width: 100%;
+            max-height: 70vh;
+            overflow: hidden;
+            background: var(--bg-surface);
+            cursor: pointer;
+        }
+
+        .gallery-item-inner.portrait {
+            aspect-ratio: 3/4;
+            max-width: 85vw;
+            max-height: 65vh;
+        }
+
+        .gallery-item-inner.landscape {
+            aspect-ratio: 16/10;
+            max-width: 92vw;
+            max-height: 65vh;
+        }
+
+        .gallery-item-inner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-primary), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.45s var(--ease-out-expo);
+            z-index: 2;
+        }
+
+        .gallery-item-inner:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(15%) brightness(0.95);
+            transition: transform 0.7s var(--ease-out-expo), filter 0.5s ease;
+        }
+
+        .gallery-item-inner:hover img {
+            transform: scale(1.02);
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            transform: translateY(15px);
+            opacity: 0;
+            transition: all 0.45s var(--ease-out-expo);
+            z-index: 3;
+        }
+
+        .gallery-item-inner:hover .gallery-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-meta {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.15em;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .slider-nav:hover {
+            background: var(--accent);
+        }
+
+        .slider-nav:hover svg {
+            stroke: var(--bg-primary);
+        }
+
+        .slider-nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-primary);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .slider-prev { left: 1rem; }
+        .slider-next { right: 1rem; }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        .slider-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--accent);
+            transform: scale(1.4);
+        }
+
+        .slider-counter {
+            position: absolute;
+            top: 50%;
+            right: 3rem;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+        }
+
+        .slider-counter span {
+            color: var(--accent);
+        }
+
+        /* 关于 */
+        .about {
+            padding: 10rem 4rem;
+            background: var(--bg-surface);
+            transition: background-color 0.5s ease;
+        }
+
+        .about-inner {
+            max-width: 980px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-img {
+            aspect-ratio: 3/4;
+            background: var(--bg-elevated);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--border);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(25%);
+        }
+
+        .about-content {
+            padding: 1rem 0;
+        }
+
+        .about-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.35em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+        }
+
+        .about-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 300;
+            letter-spacing: 0.04em;
+            margin-bottom: 1.8rem;
+            line-height: 1.25;
+        }
+
+        .about-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+        }
+
+        .about-sign {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-style: italic;
+            color: var(--accent);
+            margin-top: 1.8rem;
+        }
+
+        /* 联系 */
+        .contact {
+            padding: 10rem 4rem;
+            text-align: center;
+        }
+
+        .contact-inner {
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.8rem;
+            font-weight: 300;
+        }
+
+        .contact-email {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--accent-dim);
+            transition: all 0.3s ease;
+        }
+
+        .contact-email:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .social {
+            display: flex;
+            justify-content: center;
+            gap: 2.2rem;
+            margin-top: 2.8rem;
+        }
+
+        .social a {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .social a:hover {
+            color: var(--accent);
+        }
+
+        .social-wechat {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .social-wechat .wechat-qr {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .social-wechat:hover .wechat-qr {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .social-wechat .wechat-qr img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /* 页脚 */
+        footer {
+            padding: 2.5rem 4rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: border-color 0.5s ease;
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+        }
+
+        .footer-credit {
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        /* 灯箱 */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 8, 8, 0.97);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+
+        [data-theme="light"] .lightbox {
+            background: rgba(248, 246, 242, 0.97);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            transform: scale(0.96);
+            transition: transform 0.5s var(--ease-out-expo);
+        }
+
+        .lightbox.active .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.4rem 1.8rem;
+            }
+
+            nav.scrolled {
+                padding: 1rem 1.8rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .theme-toggle {
+                top: 1.2rem;
+                right: 1.2rem;
+                width: 36px;
+                height: 36px;
+            }
+
+            .hero, .gallery, .about, .contact {
+                padding: 7rem 1.8rem;
+            }
+
+            .gallery {
+                padding: 6rem 0;
+            }
+
+            .gallery-item {
+                padding: 0 1rem;
+            }
+
+            .gallery-item-inner.portrait {
+                max-width: 95vw;
+                max-height: 60vh;
+            }
+
+            .gallery-item-inner.landscape {
+                max-width: 95vw;
+                max-height: 50vh;
+            }
+
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider-nav svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .slider-counter {
+                right: 1rem;
+            }
+
+            .slider-dots {
+                gap: 0.5rem;
+            }
+
+            .slider-dot {
+                width: 4px;
+                height: 4px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主题切换 -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="切换主题">
+        <svg class="sun-icon" viewBox="0 0 24 24"><path d="M12 7a5 5 0 100 10 5 5 0 000-10zM12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.79 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+
+    <!-- 动态背景 -->
+    <div class="background-layer">
+        <div class="flow-lines">
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+            <div class="flow-line"></div>
+        </div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <!-- 导航 -->
+    <nav>
+        <a href="#" class="logo">HEBINON</a>
+        <ul class="nav-links">
+            <li><a href="#works">作品</a></li>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+
+    <!-- 首页 -->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-subtitle">写实人物素描</p>
+            <h1 class="hero-title">
+                <span>以线条</span>
+                <span>触摸灵魂</span>
+            </h1>
+            <p class="hero-desc">
+                十余年专注写实人物素描，每一笔都是对真实的致敬。炭笔的质感，捕捉人物最细微的精神与情感。
+            </p>
+            <a href="#works" class="hero-cta">查看作品</a>
+        </div>
+        <div class="scroll-hint">
+            <span>向下</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- 作品集 -->
+    <section class="gallery" id="works">
+        <div class="section-header">
+            <p class="section-label">Portfolio</p>
+            <h2 class="section-title">精选作品</h2>
+        </div>
+        <div class="gallery-slider">
+            <div class="gallery-track" id="galleryTrack">
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(0)">
+                        <img src="https://images.unsplash.com/photo-1506905925346-20b2219b8ae1?w=600&h=800&fit=crop" alt="素描作品1">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">沉思者</h3>
+                            <p class="gallery-meta">炭笔素描 · 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(1)">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop" alt="素描作品2">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">凝眸</h3>
+                            <p class="gallery-meta">炭笔素描 · 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner landscape" onclick="viewWork(2)">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1200&h=750&fit=crop" alt="素描作品3">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">光影交错</h3>
+                            <p class="gallery-meta">炭笔素描 · 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(3)">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=800&fit=crop" alt="素描作品4">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">侧颜</h3>
+                            <p class="gallery-meta">炭笔素描 · 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(4)">
+                        <img src="https://images.unsplash.com/photo-1507003216129-630d2416d0c6?w=600&h=800&fit=crop" alt="素描作品5">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">岁月痕迹</h3>
+                            <p class="gallery-meta">炭笔素描 · 2023</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(5)">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop" alt="素描作品6">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">静谧</h3>
+                            <p class="gallery-meta">炭笔素描 · 2022</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner landscape" onclick="viewWork(6)">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988bab421?w=1200&h=750&fit=crop" alt="素描作品7">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">群体像</h3>
+                            <p class="gallery-meta">炭笔素描 · 2022</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(7)">
+                        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&h=800&fit=crop" alt="素描作品8">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">回眸</h3>
+                            <p class="gallery-meta">炭笔素描 · 2021</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(8)">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&h=800&fit=crop" alt="素描作品9">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">坚毅</h3>
+                            <p class="gallery-meta">炭笔素描 · 2021</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-inner portrait" onclick="viewWork(9)">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cdb25?w=600&h=800&fit=crop" alt="素描作品10">
+                        <div class="gallery-info">
+                            <h3 class="gallery-title">柔光</h3>
+                            <p class="gallery-meta">炭笔素描 · 2020</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav slider-prev" onclick="prevSlide()">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+            </div>
+            <div class="slider-nav slider-next" onclick="nextSlide()">
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+            <div class="slider-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
+            </div>
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+
+    <!-- 关于 -->
+    <section class="about" id="about">
+        <div class="about-inner">
+            <div class="about-img">
+                <img src="https://p11-dreamina-sign.byteimg.com/tos-cn-i-tb4s082cfz/6212db50e8a2422d99a89a2ad87716bc~tplv-tb4s082cfz-aigc_resize:720:720.webp?lk3s=4fa96020&x-expires=1808029599&x-signature=VJIiecmYd4dyIPi8HG%2FhCNmJ0ak%3D" alt="艺术家">
+            </div>
+            <div class="about-content">
+                <p class="about-label">About</p>
+                <h2 class="about-title">炭笔素描十余年，每一幅都是与心灵的对话</h2>
+                <p class="about-text">
+                    我相信素描是最诚实的艺术形式。没有色彩的掩盖，每一道炭笔的痕迹都必须诚实。十余年来，我专注写实人物素描，专注于捕捉人物的神态与内心世界。
+                </p>
+                <p class="about-text">
+                    我的作品不追求完美无缺，而是追求真实。每一张肖像都是一次相遇，我努力呈现的是人物最本质的精神与情感。
+                </p>
+                <p class="about-sign">— hebin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系 -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <h2 class="contact-title">期待与您相遇</h2>
+            <p class="contact-text">
+                如有定制肖像或合作意向，欢迎联系。
+            </p>
+            <a href="mailto:hebinon@163.com" class="contact-email">hebinon@163.com</a>
+            <div class="social">
+                <a href="#" class="social-wechat">微信
+                    <span class="wechat-qr">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=hebinon163&bgcolor=1a1a1a&color=c4a77d" alt="微信二维码">
+                    </span>
+                </a>
+                <a href="#">抖音</a>
+                <a href="#">小红书</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p class="footer-copy">© 2026 hebin. All rights reserved.</p>
+        <p class="footer-credit">crafted with soul</p>
+    </footer>
+
+    <!-- 灯箱 -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">×</span>
+        <img src="" alt="" class="lightbox-img" id="lightbox-img">
+    </div>
+
+    <script>
+        // 主题切换
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const isLight = current === 'light';
+            html.setAttribute('data-theme', isLight ? '' : 'light');
+            localStorage.setItem('theme', isLight ? 'dark' : 'light');
+        }
+
+        // 加载保存的主题 (默认亮色)
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', '');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+        }
+
+        // 导航滚动
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // 轮播
+        let currentIndex = 0;
+        const totalSlides = 10;
+        const track = document.getElementById('galleryTrack');
+        const dotsContainer = document.getElementById('sliderDots');
+        const currentEl = document.getElementById('currentSlide');
+
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateSlider() {
+            if (track) track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+            if (currentEl) currentEl.textContent = currentIndex + 1;
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // 灯箱
+        const works = [
+            'https://images.unsplash.com/photo-1506905925346-20b2219b8ae1?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=1600&h=1000&fit=crop',
+            'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1507003216129-630d2416d0c6?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1517841905240-472988bab421?w=1600&h=1000&fit=crop',
+            'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=1200&h=1600&fit=crop',
+            'https://images.unsplash.com/photo-1529626455594-4ff0802cdb25?w=1200&h=1600&fit=crop'
+        ];
+
+        function viewWork(index) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = works[index];
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
