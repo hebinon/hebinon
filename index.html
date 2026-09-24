@@ -3,421 +3,841 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hebinon — Resume</title>
+<title>HeBin - Product Director / Concept Designer</title>
 <style>
-  /* ===== Reset & Base ===== */
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: #F5F2EB;
-    color: #1A1A1A;
-    line-height: 1.6;
-  }
+/* === Bauhaus Color Palette === */
+:root {
+  --bauhaus-red: #E82B2B;
+  --bauhaus-blue: #2B5BDB;
+  --bauhaus-yellow: #F2D22B;
+  --bauhaus-black: #1A1A1A;
+  --bauhaus-white: #FAFAFA;
+  --bauhaus-gray: #8C8C8C;
+  --bauhaus-light: #F0F0F0;
+  --grid-gap: 2rem;
+  --border-thick: 3px solid var(--bauhaus-black);
+  --border-medium: 2px solid var(--bauhaus-black);
+  --border-thin: 1px solid var(--bauhaus-black);
+}
 
-  /* ===== Bauhaus Color Variables ===== */
+/* === Reset & Base === */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  background-color: var(--bauhaus-white);
+  color: var(--bauhaus-black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* === Decorative Bauhaus Elements === */
+body::before {
+  content: '';
+  position: fixed;
+  top: -5%;
+  right: -5%;
+  width: 25vw;
+  height: 25vw;
+  background: var(--bauhaus-yellow);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.8;
+  max-width: 300px;
+  max-height: 300px;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 10%;
+  left: -3%;
+  width: 18vw;
+  height: 18vw;
+  background: var(--bauhaus-red);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.6;
+  max-width: 220px;
+  max-height: 220px;
+}
+
+/* === Grid Container === */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--grid-gap);
+}
+
+/* === Header Section === */
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 0;
+  border-bottom: var(--border-thick) solid var(--bauhaus-black);
+  position: relative;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 30%;
+  height: 3px;
+  background: var(--bauhaus-red);
+}
+
+.header-content h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  color: var(--bauhaus-black);
+}
+
+.header-content .subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--bauhaus-gray);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.header-content .tagline {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background: var(--bauhaus-blue);
+  color: var(--bauhaus-white);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: var(--border-medium) solid var(--bauhaus-black);
+  box-shadow: 4px 4px 0 var(--bauhaus-black);
+}
+
+/* Geometric decoration in header */
+.header-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.geo-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--bauhaus-red);
+  border: var(--border-thick) solid var(--bauhaus-black);
+}
+
+.geo-square {
+  width: 50px;
+  height: 50px;
+  background: var(--bauhaus-yellow);
+  border: var(--border-thick) solid var(--bauhaus-black);
+  transform: rotate(15deg);
+}
+
+.geo-triangle {
+  width: 0;
+  height: 0;
+  border-left: 35px solid transparent;
+  border-right: 35px solid transparent;
+  border-bottom: 60px solid var(--bauhaus-blue);
+  position: relative;
+}
+
+.geo-triangle::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: -30px;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 50px solid var(--bauhaus-white);
+  opacity: 0.3;
+}
+
+/* === Section Titles === */
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 8px solid var(--bauhaus-red);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 1rem;
+  width: 100%;
+  height: 2px;
+  background: var(--bauhaus-black);
+  opacity: 0.3;
+}
+
+/* === Overview Grid === */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.overview-card {
+  border: var(--border-thick) solid var(--bauhaus-black);
+  padding: 1.5rem;
+  position: relative;
+  background: var(--bauhaus-white);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.overview-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--bauhaus-black);
+}
+
+.overview-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+}
+
+.overview-card:nth-child(1)::before { background: var(--bauhaus-red); }
+.overview-card:nth-child(2)::before { background: var(--bauhaus-blue); }
+.overview-card:nth-child(3)::before { background: var(--bauhaus-yellow); }
+.overview-card:nth-child(4)::before { background: var(--bauhaus-black); }
+
+.overview-card h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--bauhaus-gray);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.overview-card p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* === Skills Section === */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.skill-category {
+  border: var(--border-thick) solid var(--bauhaus-black);
+  padding: 1.5rem;
+  position: relative;
+  background: var(--bauhaus-white);
+}
+
+.skill-category::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.skill-category:nth-child(1)::after { background: var(--bauhaus-red); }
+.skill-category:nth-child(2)::after { background: var(--bauhaus-blue); }
+.skill-category:nth-child(3)::after { background: var(--bauhaus-yellow); }
+
+.skill-category h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: var(--border-thin) solid var(--bauhaus-black);
+}
+
+.skill-list {
+  list-style: none;
+}
+
+.skill-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--bauhaus-light);
+  font-size: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.skill-list li::before {
+  content: '\25A0';
+  position: absolute;
+  left: 0;
+  color: var(--bauhaus-red);
+  font-size: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.skill-list li:last-child {
+  border-bottom: none;
+}
+
+/* === Experience Section === */
+.timeline {
+  position: relative;
+  margin-top: 1.5rem;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--bauhaus-red), var(--bauhaus-blue), var(--bauhaus-yellow));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border: var(--border-medium) solid var(--bauhaus-black);
+  background: var(--bauhaus-white);
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  background: var(--bauhaus-light);
+  transform: translateX(5px);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.4rem;
+  top: 1.8rem;
+  width: 16px;
+  height: 16px;
+  background: var(--bauhaus-yellow);
+  border: var(--border-thick) solid var(--bauhaus-black);
+  border-radius: 50%;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.timeline-period {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--bauhaus-blue);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(43, 91, 219, 0.1);
+  padding: 0.2rem 0.8rem;
+  border: var(--border-thin) solid var(--bauhaus-blue);
+}
+
+.timeline-company {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--bauhaus-black);
+}
+
+.timeline-role {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0.2rem 1rem;
+  background: var(--bauhaus-red);
+  color: var(--bauhaus-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.timeline-desc {
+  color: var(--bauhaus-gray);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+/* === Projects Section === */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.project-card {
+  border: var(--border-thick) solid var(--bauhaus-black);
+  padding: 2rem;
+  position: relative;
+  background: var(--bauhaus-white);
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+}
+
+.project-card:nth-child(1)::before { background: var(--bauhaus-red); }
+.project-card:nth-child(2)::before { background: var(--bauhaus-blue); }
+.project-card:nth-child(3)::before { background: var(--bauhaus-yellow); }
+
+.project-number {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--bauhaus-black);
+  opacity: 0.1;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.project-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--bauhaus-black);
+}
+
+.project-role {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: var(--bauhaus-light);
+  border: var(--border-thin) solid var(--bauhaus-black);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--bauhaus-black);
+}
+
+.project-desc {
+  color: var(--bauhaus-gray);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+/* === Summary Section === */
+.summary-box {
+  border: var(--border-thick) solid var(--bauhaus-black);
+  padding: 2.5rem;
+  margin-top: 1.5rem;
+  position: relative;
+  background: var(--bauhaus-white);
+}
+
+.summary-box::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+  font-size: 5rem;
+  color: var(--bauhaus-red);
+  font-family: Georgia, serif;
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.summary-box p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--bauhaus-black);
+  position: relative;
+  z-index: 1;
+}
+
+.summary-box p strong {
+  color: var(--bauhaus-red);
+  font-weight: 800;
+}
+
+/* === Footer === */
+.footer {
+  text-align: center;
+  padding: 3rem 0;
+  margin-top: 3rem;
+  border-top: var(--border-thick) solid var(--bauhaus-black);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 20%;
+  height: 3px;
+  background: var(--bauhaus-blue);
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: var(--bauhaus-gray);
+  letter-spacing: 1px;
+}
+
+.footer .contact {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  background: var(--bauhaus-black);
+  color: var(--bauhaus-white);
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: var(--border-medium) solid var(--bauhaus-black);
+  transition: all 0.2s;
+}
+
+.footer .contact:hover {
+  background: var(--bauhaus-red);
+  box-shadow: 4px 4px 0 var(--bauhaus-black);
+  transform: translate(-2px, -2px);
+}
+
+/* === Decorative Lines === */
+.deco-line {
+  height: 4px;
+  background: linear-gradient(90deg, var(--bauhaus-red) 0%, var(--bauhaus-blue) 50%, var(--bauhaus-yellow) 100%);
+  margin: 1rem 0;
+}
+
+/* === Responsive Design === */
+@media (max-width: 768px) {
   :root {
-    --red:    #E82B2B;
-    --blue:   #2B5BDB;
-    --yellow: #F2D22B;
-    --black:  #1A1A1A;
-    --white:  #F5F2EB;
-    --gray:   #888;
+    --grid-gap: 1.5rem;
   }
-
-  /* ===== Header / Hero ===== */
-  .hero {
-    background: var(--black);
-    color: var(--white);
-    padding: 60px 24px 40px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+  .header {
+    grid-template-columns: 1fr;
     text-align: center;
+    padding: 2rem 0;
   }
-  .hero h1 {
-    font-size: clamp(2rem, 6vw, 4rem);
-    font-weight: 900;
-    letter-spacing: -1px;
-    margin-bottom: 8px;
+  
+  .header::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
   }
-  .hero .subtitle {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    color: var(--yellow);
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .hero .contact-line {
-    margin-top: 16px;
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  .hero .contact-line a {
-    color: var(--yellow);
-    text-decoration: none;
-    border-bottom: 2px solid var(--red);
-  }
-
-  /* Bauhaus geometric decorations */
-  .geo-circle {
-    position: absolute;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: var(--red);
-    top: 30px; left: 40px;
-    opacity: 0.85;
-  }
-  .geo-square {
-    position: absolute;
-    width: 80px; height: 80px;
-    background: var(--blue);
-    top: 50px; right: 60px;
-    transform: rotate(45deg);
-    opacity: 0.8;
-  }
-  .geo-triangle {
-    position: absolute;
-    width: 0; height: 0;
-    border-left: 55px solid transparent;
-    border-right: 55px solid transparent;
-    border-bottom: 95px solid var(--yellow);
-    bottom: 20px; right: 100px;
-    opacity: 0.7;
-  }
-
-  /* ===== Navigation ===== */
-  nav {
-    background: var(--white);
-    border-bottom: 4px solid var(--black);
-    padding: 0 24px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
+  
+  .header-decoration {
     justify-content: center;
-    gap: 0;
   }
-  nav a {
-    display: block;
-    padding: 14px 24px;
-    text-decoration: none;
-    color: var(--black);
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border-right: 3px solid var(--black);
-    transition: background 0.2s, color 0.2s;
+  
+  .timeline-header {
+    flex-direction: column;
   }
-  nav a:last-child { border-right: none; }
-  nav a:hover {
-    background: var(--yellow);
-    color: var(--black);
+  
+  .timeline {
+    padding-left: 1.5rem;
   }
-
-  /* ===== Main Content ===== */
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 24px 60px;
+  
+  .timeline-item::before {
+    left: -1.9rem;
   }
-
-  /* ===== Section Titles ===== */
-  .section-title {
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 28px;
-    padding-bottom: 10px;
-    border-bottom: 5px solid var(--black);
-    position: relative;
-  }
-  .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -5px; left: 0;
-    width: 60px; height: 5px;
-    background: var(--red);
-  }
-
-  /* ===== Summary ===== */
-  .summary {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    margin-bottom: 48px;
-    padding: 24px;
-    border-left: 6px solid var(--blue);
-    background: rgba(43,91,219,0.04);
-  }
-
-  /* ===== Experience Cards ===== */
-  .experience-list {
-    display: grid;
-    gap: 24px;
-    margin-bottom: 48px;
-  }
-  .exp-card {
-    background: var(--white);
-    border: 3px solid var(--black);
-    padding: 24px;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .exp-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 8px 8px 0 var(--black);
-  }
-  .exp-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 6px; height: 100%;
-    background: var(--red);
-  }
-  .exp-card h3 {
-    font-size: 1.15rem;
-    font-weight: 800;
-    margin-bottom: 4px;
-  }
-  .exp-card .company {
-    color: var(--blue);
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 4px;
-  }
-  .exp-card .date {
-    font-size: 0.8rem;
-    color: var(--gray);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 10px;
-  }
-  .exp-card ul {
-    padding-left: 18px;
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-  .exp-card ul li { margin-bottom: 4px; }
-
-  /* ===== Skills ===== */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .skill-item {
-    border: 3px solid var(--black);
-    padding: 16px 20px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    position: relative;
-    transition: background 0.2s;
-  }
-  .skill-item:hover { background: var(--yellow); }
-  .skill-item::before {
-    content: '';
-    position: absolute;
-    top: 6px; left: 6px;
-    width: 10px; height: 10px;
-    border-radius: 50%;
-    background: var(--red);
-  }
-  .skill-item:nth-child(3n+2)::before { background: var(--blue); }
-  .skill-item:nth-child(3n+3)::before { background: var(--yellow); }
-
-  /* ===== Projects ===== */
+  
   .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    margin-bottom: 48px;
+    grid-template-columns: 1fr;
   }
+  
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .header-content h1 {
+    font-size: 2.2rem;
+  }
+  
+  .overview-card {
+    padding: 1.2rem;
+  }
+  
   .project-card {
-    border: 3px solid var(--black);
-    padding: 24px;
-    position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 1.5rem;
   }
-  .project-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 6px 6px 0 var(--blue);
+  
+  .summary-box {
+    padding: 1.5rem;
   }
-  .project-card h3 {
-    font-size: 1.05rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .project-card p {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: #444;
-  }
-  .project-card .tag {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 3px 10px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid var(--black);
-    background: var(--white);
-  }
+}
 
-  /* ===== Footer ===== */
-  footer {
-    background: var(--black);
-    color: var(--white);
-    text-align: center;
-    padding: 32px 24px;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
+/* === Print Styles === */
+@media print {
+  body::before, body::after {
+    display: none;
   }
-  footer a { color: var(--yellow); text-decoration: none; }
+  
+  .header-decoration {
+    display: none;
+  }
+  
+  .timeline-item:hover {
+    transform: none;
+    background: var(--bauhaus-white);
+  }
+  
+  .overview-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
 
-  /* ===== Responsive ===== */
-  @media (max-width: 768px) {
-    nav { flex-wrap: wrap; }
-    nav a { flex: 1; text-align: center; padding: 12px 12px; font-size: 0.78rem; }
-    .geo-circle { width: 70px; height: 70px; top: 20px; left: 16px; }
-    .geo-square { width: 50px; height: 50px; top: 30px; right: 20px; }
-    .geo-triangle { border-left-width: 35px; border-right-width: 35px; border-bottom-width: 60px; bottom: 10px; right: 40px; }
+/* === Accessibility === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
   }
-  @media (max-width: 480px) {
-    .hero { padding: 40px 16px 30px; }
-    main { padding: 28px 16px 40px; }
-    nav a { padding: 10px 8px; font-size: 0.72rem; letter-spacing: 0.5px; }
-    .exp-card { padding: 18px; }
-  }
+}
 
-  /* ===== Reduced Motion ===== */
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
-  }
+/* === Focus styles === */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--bauhaus-yellow);
+  outline-offset: 2px;
+}
 </style>
 </head>
 <body>
 
-<!-- ===== HERO ===== -->
-<header class="hero">
-  <div class="geo-circle"></div>
-  <div class="geo-square"></div>
-  <div class="geo-triangle"></div>
-  <h1>HEBINON</h1>
-  <p class="subtitle">Developer &amp; Creator</p>
-  <p class="contact-line">
-    <a href="https://github.com/hebinon" target="_blank" rel="noopener">github.com/hebinon</a>
-  </p>
-</header>
+<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>HeBin</h1>
+      <div class="subtitle">HeBin · Product Director</div>
+      <div class="tagline">Product Strategy / UI/UX Design / IoT Solutions</div>
+    </div>
+    <div class="header-decoration">
+      <div class="geo-circle"></div>
+      <div class="geo-square"></div>
+      <div class="geo-triangle"></div>
+    </div>
+  </header>
 
-<!-- ===== NAV ===== -->
-<nav>
-  <a href="#about">About</a>
-  <a href="#experience">Experience</a>
-  <a href="#skills">Skills</a>
-  <a href="#projects">Projects</a>
-</nav>
-
-<!-- ===== MAIN ===== -->
-<main>
-
-  <!-- About -->
-  <section id="about">
-    <h2 class="section-title">About</h2>
-    <div class="summary">
-      <p>A passionate developer with a strong focus on building clean, efficient, and user-friendly software. Dedicated to continuous learning and open-source contribution.</p>
+  <!-- Overview -->
+  <section>
+    <h2 class="section-title">Overview</h2>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3>Role</h3>
+        <p>Product Strategy, Industrial UI/UX Design, IoT Solutions</p>
+      </div>
+      <div class="overview-card">
+        <h3>Industry Background</h3>
+        <p>21 years of experience spanning smart industry, smart cities, agricultural informatization, and digital art</p>
+      </div>
+      <div class="overview-card">
+        <h3>Core Strengths</h3>
+        <p>Composite background from visual design to product architecture, expert in BIM, SaaS, and digital twin product lifecycle management</p>
+      </div>
+      <div class="overview-card">
+        <h3>Phone</h3>
+        <p>152-4465-1055 (WeChat same number)</p>
+      </div>
     </div>
   </section>
 
-  <!-- Experience -->
-  <section id="experience">
-    <h2 class="section-title">Experience</h2>
-    <div class="experience-list">
-
-      <!-- Replace with your real experience -->
-      <div class="exp-card">
-        <h3>Software Developer</h3>
-        <p class="company">Company Name</p>
-        <p class="date">Jan 2023 – Present</p>
-        <ul>
-          <li>Developed and maintained key features for production applications.</li>
-          <li>Collaborated with cross-functional teams to deliver high-quality software.</li>
-          <li>Optimized system performance and reduced load times by 30%.</li>
-        </ul>
-      </div>
-
-      <div class="exp-card">
-        <h3>Junior Developer</h3>
-        <p class="company">Previous Company</p>
-        <p class="date">Jun 2021 – Dec 2022</p>
-        <ul>
-          <li>Built responsive web interfaces using modern frameworks.</li>
-          <li>Participated in code reviews and agile development processes.</li>
-          <li>Contributed to internal tooling and automation scripts.</li>
-        </ul>
-      </div>
-
-    </div>
-  </section>
+  <div class="deco-line"></div>
 
   <!-- Skills -->
-  <section id="skills">
-    <h2 class="section-title">Skills</h2>
+  <section>
+    <h2 class="section-title">Professional Skills &amp; Expertise</h2>
     <div class="skills-grid">
-      <!-- Replace with your real skills -->
-      <div class="skill-item">JavaScript / TypeScript</div>
-      <div class="skill-item">Python</div>
-      <div class="skill-item">React / Vue</div>
-      <div class="skill-item">Node.js</div>
-      <div class="skill-item">Git &amp; GitHub</div>
-      <div class="skill-item">Docker</div>
-      <div class="skill-item">SQL / NoSQL</div>
-      <div class="skill-item">Linux</div>
+      <div class="skill-category">
+        <h3>Product Management</h3>
+        <ul class="skill-list">
+          <li>Requirements Modeling</li>
+          <li>Business Architecture Design</li>
+          <li>PRD Writing</li>
+          <li>Product Lifecycle Management (PLM)</li>
+          <li>BIM Function Planning</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3>Visual &amp; Interaction</h3>
+        <ul class="skill-list">
+          <li>Industrial HMI UI Standards Development</li>
+          <li>Big Data Visualization Design</li>
+          <li>3D Digital Foundation Construction</li>
+          <li>Professional Hand-drawing &amp; Concept Art</li>
+        </ul>
+      </div>
+      <div class="skill-category">
+        <h3>Technology Integration</h3>
+        <ul class="skill-list">
+          <li>IoT Sensing Layer Protocols (Smoke/Heat Detection)</li>
+          <li>Electrical Fire Monitoring Systems</li>
+          <li>Video Access Control System Integration</li>
+          <li>Cloud Data Pipeline Development</li>
+        </ul>
+      </div>
     </div>
   </section>
+
+  <div class="deco-line"></div>
+
+  <!-- Experience -->
+  <section>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2025.12 - 2026.03</span>
+          <span class="timeline-company">Harbin Boan Fire Safety Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">Product Manager</span>
+        <p class="timeline-desc">Responsible for business modeling of the smart fire supervision platform, interfacing with government and enterprise requirements, and formulating core business closed-loop solutions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2023.08 - 2025.12</span>
+          <span class="timeline-company">Heilongjiang Yunshang Smart Agriculture Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">Senior Product Management</span>
+        <p class="timeline-desc">Formulated mid-to-long-term strategies for smart building and agricultural internet products, led cross-departmental collaboration and risk prevention.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2021.11 - 2023.06</span>
+          <span class="timeline-company">Beijing Silin Robot Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">Product Manager</span>
+        <p class="timeline-desc">Responsible for industrial robot data backend and HMI control system planning, building 3D digital foundation.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2019.07 - 2023.06</span>
+          <span class="timeline-company">Beijing Silin Robot Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">UI Designer</span>
+        <p class="timeline-desc">Established product design standards for the branch company, responsible for SaaS backend and visualization system visual architecture.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2015.10 - 2019.06</span>
+          <span class="timeline-company">Heilongjiang Weinong Data Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">Visual Designer</span>
+        <p class="timeline-desc">Responsible for platform-wide visual resource development and interaction experience design.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-header">
+          <span class="timeline-period">2010.03 - 2013.03</span>
+          <span class="timeline-company">Beijing Pixel Software Technology Co., Ltd.</span>
+        </div>
+        <span class="timeline-role">Senior Concept Artist</span>
+        <p class="timeline-desc">Responsible for scene design, concept art, and art asset production for the large-scale PC game "Swordsman II".</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="deco-line"></div>
 
   <!-- Projects -->
-  <section id="projects">
-    <h2 class="section-title">Projects</h2>
+  <section>
+    <h2 class="section-title">Key Project Achievements</h2>
     <div class="projects-grid">
-
-      <!-- Replace with your real projects -->
       <div class="project-card">
-        <h3>Project Alpha</h3>
-        <p>A full-stack web application for task management with real-time collaboration features.</p>
-        <span class="tag">React</span>
-        <span class="tag">Node.js</span>
+        <div class="project-number">01</div>
+        <h3>Industrial Robot HMI Visualization System</h3>
+        <div class="project-role">Jilin Huaneng Power Plant · Senior Product Management / Visual Lead</div>
+        <p class="project-desc">Successfully built an industrial robot monitoring system for the power industry. By optimizing the 3D digital foundation and touch interaction pipeline, significantly improved operational precision and real-time monitoring efficiency, ensuring the project met high safety standards.</p>
       </div>
-
       <div class="project-card">
-        <h3>Project Beta</h3>
-        <p>An open-source CLI tool that automates boilerplate code generation for developers.</p>
-        <span class="tag">Python</span>
-        <span class="tag">CLI</span>
+        <div class="project-number">02</div>
+        <h3>Smart Building BIM IoT Display Platform</h3>
+        <div class="project-role">Shanghai Huaneng Real Estate · Senior Product Management</div>
+        <p class="project-desc">Led functional definition and visual aid design of BIM models. Integrated spatial data with IoT real-time feedback, providing intuitive digital decision-making basis for property asset management.</p>
       </div>
-
       <div class="project-card">
-        <h3>Project Gamma</h3>
-        <p>A data visualization dashboard for monitoring system metrics and performance analytics.</p>
-        <span class="tag">D3.js</span>
-        <span class="tag">TypeScript</span>
+        <div class="project-number">03</div>
+        <h3>Smart Fire IoT Monitoring Solution</h3>
+        <div class="project-role">Product Manager</div>
+        <p class="project-desc">Coordinated hardware R&amp;D and software engineering, achieved protocol integration and data debugging for multiple IoT detectors. Successfully established a closed-loop operational system for fire warning, hazard investigation, and emergency command.</p>
       </div>
-
     </div>
   </section>
 
-</main>
+  <div class="deco-line"></div>
 
-<!-- ===== FOOTER ===== -->
-<footer>
-  <p>&copy; 2026 Hebinon. Built with pure HTML &amp; CSS.</p>
-  <p><a href="https://github.com/hebinon" target="_blank" rel="noopener">GitHub</a></p>
-</footer>
+  <!-- Summary -->
+  <section>
+    <h2 class="section-title">Career Summary</h2>
+    <div class="summary-box">
+      <p>With over twenty years of professional experience, successfully transitioned from a <strong>senior visual artist</strong> to a <strong>composite product management expert</strong>. Excels at combining rigorous logical architecture with exceptional visual experience, possessing strong requirement insight and project execution capabilities when handling complex industrial automation and smart management systems.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>HeBin · Product Director / Concept Designer</p>
+    <p>Phone: 152-4465-1055 (WeChat same number)</p>
+    <a href="https://github.com/hebinon" class="contact" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
+  </footer>
+</div>
 
 </body>
 </html>
